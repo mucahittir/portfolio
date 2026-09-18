@@ -44,3 +44,11 @@ npm run dev
 # Prodüksiyon derlemesi al
 npm run build
 ```
+
+## 🔄 CI/CD & Otomatik Dağıtım (Jenkins)
+Proje `main` branch'ine her kod pushlandığında yerel Jenkins Pipeline'ı (`portfolio-deploy`) otomatik olarak devreye girer:
+1. **Source Checkout:** GitHub üzerinden son değişiklikler çekilir.
+2. **Build & Containerize:** Dockerfile üzerinden multi-stage optimize derleme alınır.
+3. **Continuous Deployment:** Docker Compose ile `portfolio` konteyneri canlıda güncellenir (`:3002`).
+4. **Health Check:** Konteynerin ayağa kalktığı ve HTTP 200 verdiği doğrulanır.
+
