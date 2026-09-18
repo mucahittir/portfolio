@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle, Github, Linkedin, MessageSquare } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
@@ -79,22 +79,6 @@ export function Contact() {
                     <span className="block text-xs text-gray-500 dark:text-gray-400">{t('contact.emailLabel')}</span>
                     <span className="text-sm font-semibold text-gray-900 dark:text-gray-200 group-hover:text-accent transition-colors break-all">
                       {info.email}
-                    </span>
-                  </div>
-                </a>
-
-                {/* Phone */}
-                <a
-                  href={`tel:${info.phone.replace(/\s+/g, '')}`}
-                  className="flex items-center gap-3.5 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-dark-surface transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="block text-xs text-gray-500 dark:text-gray-400">{t('contact.phoneLabel')}</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-200 group-hover:text-accent transition-colors">
-                      {info.phone}
                     </span>
                   </div>
                 </a>
