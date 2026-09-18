@@ -6,12 +6,12 @@ export const skillCategories = [
     description: "Yüksek verimli, güvenli ve ölçeklenebilir kurumsal mimariler",
     skills: [
       { name: ".NET Core / C#", level: 88, highlighted: true },
-      { name: "REST API & WebSocket", level: 86, highlighted: true },
-      { name: "Entity Framework Core", level: 85, highlighted: true },
-      { name: "Mikroservis Mimarisi", level: 80, highlighted: true },
+      { name: "REST API & WebSocket", level: 87, highlighted: true },
+      { name: "Entity Framework Core", level: 88, highlighted: true },
+      { name: "Mikroservis Mimarisi", level: 82, highlighted: true },
       { name: "Dependency Injection & IoC", level: 85, highlighted: false },
-      { name: "JWT Auth & Yetkilendirme", level: 82, highlighted: false },
-      { name: "RabbitMQ", level: 75, highlighted: false },
+      { name: "JWT Auth & Yetkilendirme", level: 85, highlighted: false },
+      { name: "RabbitMQ", level: 70, highlighted: false },
       { name: "Unit Test & Clean Architecture", level: 80, highlighted: true }
     ]
   },
@@ -51,7 +51,7 @@ export const skillCategories = [
     description: "Konteynerizasyon, CI/CD hatları ve platform entegrasyonları",
     skills: [
       { name: "Git & GitHub Versiyonlama", level: 84, highlighted: true },
-      { name: "Docker", level: 75, highlighted: true },
+      { name: "Docker", level: 82, highlighted: true },
       { name: "Unity & C# Game Physics", level: 74, highlighted: false },
       { name: "ASP.NET Web Forms (Legacy)", level: 72, highlighted: false },
       { name: "Azure DevOps & CI/CD", level: 70, highlighted: false },
