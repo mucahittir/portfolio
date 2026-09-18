@@ -5,14 +5,14 @@ export const skillCategories = [
     icon: "Server",
     description: "Yüksek verimli, güvenli ve ölçeklenebilir kurumsal mimariler",
     skills: [
-      { name: ".NET Core / C#", level: 95, highlighted: true },
-      { name: "Mikroservis Mimarisi", level: 90, highlighted: true },
-      { name: "REST API & WebSocket", level: 92, highlighted: true },
-      { name: "RabbitMQ", level: 85, highlighted: false },
-      { name: "Entity Framework Core", level: 92, highlighted: true },
-      { name: "Dependency Injection", level: 95, highlighted: false },
-      { name: "JWT Auth & Authorization", level: 90, highlighted: false },
-      { name: "Unit Test & Clean Code", level: 90, highlighted: true }
+      { name: ".NET Core / C#", level: 88, highlighted: true },
+      { name: "REST API & WebSocket", level: 86, highlighted: true },
+      { name: "Entity Framework Core", level: 85, highlighted: true },
+      { name: "Mikroservis Mimarisi", level: 80, highlighted: true },
+      { name: "Dependency Injection & IoC", level: 85, highlighted: false },
+      { name: "JWT Auth & Yetkilendirme", level: 82, highlighted: false },
+      { name: "RabbitMQ", level: 75, highlighted: false },
+      { name: "Unit Test & Clean Architecture", level: 80, highlighted: true }
     ]
   },
   {
@@ -21,54 +21,54 @@ export const skillCategories = [
     icon: "Database",
     description: "İlişkisel veritabanı şemaları, karmaşık sorgular ve performans ayarlamaları",
     skills: [
-      { name: "MSSQL", level: 92, highlighted: true },
-      { name: "MySQL", level: 85, highlighted: false },
-      { name: "Stored Procedures & Triggers", level: 90, highlighted: true },
-      { name: "Sorgu & İndeks Optimizasyonu", level: 88, highlighted: true },
-      { name: "Veri Modelleme (Schema Design)", level: 90, highlighted: false }
+      { name: "MSSQL", level: 86, highlighted: true },
+      { name: "Stored Procedures & Triggers", level: 84, highlighted: true },
+      { name: "Veri Modelleme (Schema Design)", level: 82, highlighted: false },
+      { name: "Sorgu & İndeks Optimizasyonu", level: 80, highlighted: true },
+      { name: "MySQL", level: 74, highlighted: false }
     ]
   },
   {
     id: "frontend",
-    name: "Frontend & UI",
+    name: "Frontend & Arayüz",
     icon: "Layout",
-    description: "Modern, duyarlı, kullanıcı odaklı web ve mobil uyumlu arayüzler",
+    description: "Backend sistemlerle entegre çalışan, modern ve işlevsel kullanıcı arayüzleri",
     skills: [
-      { name: "React.js", level: 88, highlighted: true },
-      { name: "TypeScript / JavaScript", level: 86, highlighted: true },
-      { name: "Tailwind CSS", level: 90, highlighted: true },
-      { name: "DevExtreme UI Components", level: 85, highlighted: false },
-      { name: "Ant Design (antd)", level: 82, highlighted: false },
-      { name: "Progressive Web Apps (PWA)", level: 80, highlighted: false },
-      { name: "Axios & State Management", level: 88, highlighted: false },
-      { name: "jQuery & DOM Manipülasyonu", level: 85, highlighted: false }
+      { name: "TypeScript / JavaScript", level: 70, highlighted: true },
+      { name: "Tailwind CSS", level: 68, highlighted: false },
+      { name: "React.js", level: 66, highlighted: true },
+      { name: "Axios & API Entegrasyonu", level: 70, highlighted: false },
+      { name: "jQuery & DOM Manipülasyonu", level: 72, highlighted: false },
+      { name: "DevExtreme UI Components", level: 64, highlighted: false },
+      { name: "Ant Design (antd)", level: 62, highlighted: false },
+      { name: "Progressive Web Apps (PWA)", level: 58, highlighted: false }
     ]
   },
   {
     id: "devops",
-    name: "DevOps, Masaüstü & Araçlar",
+    name: "DevOps, Sistem & Araçlar",
     icon: "Cpu",
-    description: "Konteynerizasyon, CI/CD hatları ve masaüstü platform entegrasyonları",
+    description: "Konteynerizasyon, CI/CD hatları ve platform entegrasyonları",
     skills: [
-      { name: "Docker", level: 86, highlighted: true },
-      { name: "Azure DevOps & CI/CD", level: 82, highlighted: true },
-      { name: "Git & GitHub Versiyonlama", level: 92, highlighted: false },
-      { name: "Electron.js & WinForms", level: 80, highlighted: false },
-      { name: "Unity & C# Game Physics", level: 88, highlighted: true },
-      { name: "ASP.NET Web Forms (Legacy)", level: 82, highlighted: false }
+      { name: "Git & GitHub Versiyonlama", level: 84, highlighted: true },
+      { name: "Docker", level: 75, highlighted: true },
+      { name: "Unity & C# Game Physics", level: 74, highlighted: false },
+      { name: "ASP.NET Web Forms (Legacy)", level: 72, highlighted: false },
+      { name: "Azure DevOps & CI/CD", level: 70, highlighted: false },
+      { name: "Electron.js & WinForms", level: 65, highlighted: false }
     ]
   },
   {
     id: "methodology",
-    name: "Mimari Prensipler & Soft Skills",
+    name: "Mimari Prensipler & Metodolojiler",
     icon: "ShieldCheck",
-    description: "Mühendislik prensipleri ve çevik proje yönetimi pratikleri",
+    description: "Mühendislik standartları, tasarım desenleri ve çevik pratikler",
     skills: [
-      { name: "SOLID, DRY, KISS", level: 95, highlighted: true },
-      { name: "Design Patterns (GoF)", level: 92, highlighted: true },
-      { name: "Agile, Scrum & Kanban", level: 90, highlighted: false },
-      { name: "Teknik & API Dokümantasyonu", level: 88, highlighted: false },
-      { name: "Yapay Zeka & Geliştirici Araçları", level: 92, highlighted: true }
+      { name: "SOLID, DRY, KISS", level: 88, highlighted: true },
+      { name: "Design Patterns (GoF)", level: 82, highlighted: true },
+      { name: "Teknik & API Dokümantasyonu", level: 82, highlighted: false },
+      { name: "Yapay Zeka Destekli Geliştirme", level: 82, highlighted: true },
+      { name: "Agile, Scrum & Kanban", level: 80, highlighted: false }
     ]
   }
 ];
