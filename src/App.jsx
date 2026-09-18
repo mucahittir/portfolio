@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from './hooks/useTheme';
+import { LanguageProvider } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -9,7 +10,7 @@ import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
-export function App() {
+function PortfolioContent() {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -25,6 +26,14 @@ export function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <LanguageProvider>
+      <PortfolioContent />
+    </LanguageProvider>
   );
 }
 

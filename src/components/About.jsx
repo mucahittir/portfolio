@@ -11,23 +11,24 @@ import {
   Languages,
   CheckCircle,
   Terminal,
-  ShieldCheck,
-  Cpu
 } from 'lucide-react';
 import { personalInfo } from '../data/personal';
+import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
 import { Card } from './ui/Card';
-import { Badge } from './ui/Badge';
 
 export function About() {
+  const { language, t } = useLanguage();
+  const info = personalInfo[language];
+
   const iconMap = {
-    Tent: Tent,
-    Swords: Swords,
-    Puzzle: Puzzle,
-    Award: Award,
-    Gamepad2: Gamepad2,
-    Code2: Code2,
-    Languages: Languages,
+    Tent,
+    Swords,
+    Puzzle,
+    Award,
+    Gamepad2,
+    Code2,
+    Languages,
   };
 
   return (
@@ -36,9 +37,9 @@ export function About() {
         
         {/* Section Heading */}
         <SectionHeading
-          badge="Hakkımda"
-          title="Yazılım Mühendisliği & Problem Çözme Vizyonu"
-          subtitle="Mobil oyun geliştirmeden kurumsal ölçekli backend ve full-stack sistemlere uzanan kariyer yolculuğum."
+          badge={t('about.badge')}
+          title={t('about.title')}
+          subtitle={t('about.subtitle')}
         />
 
         {/* Story & Core Philosophy Grid */}
@@ -57,10 +58,10 @@ export function About() {
                 <span className="p-2 rounded-lg bg-accent/10 text-accent">
                   <Terminal className="w-5 h-5" />
                 </span>
-                Geliştirici Felsefem & Deneyimim
+                {t('about.devPhilosophy')}
               </h3>
               
-              {personalInfo.bioParagraphs.map((paragraph, index) => (
+              {info.bioParagraphs.map((paragraph, index) => (
                 <p
                   key={index}
                   className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base"
@@ -70,22 +71,12 @@ export function About() {
               ))}
 
               <div className="pt-3 border-t border-gray-100 dark:border-dark-border/60 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span>Kök Neden Analizi & Debugging</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span>SOLID & Clean Architecture</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span>Yüksek Performanslı MSSQL Sorguları</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span>Docker & Mikroservis Entegrasyonu</span>
-                </div>
+                {info.storyHighlights.map((highlight, index) => (
+                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                    <span>{highlight}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -105,18 +96,18 @@ export function About() {
                   <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white">Eğitim</h4>
-                  <span className="text-xs text-accent font-semibold">{personalInfo.education[0].period}</span>
+                  <h4 className="font-bold text-gray-900 dark:text-white">{t('about.educationBadge')}</h4>
+                  <span className="text-xs text-accent font-semibold">{info.education[0].period}</span>
                 </div>
               </div>
               <div className="text-base font-semibold text-gray-800 dark:text-gray-200">
-                {personalInfo.education[0].degree}
+                {info.education[0].degree}
               </div>
               <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                {personalInfo.education[0].school}
+                {info.education[0].school}
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                {personalInfo.education[0].description}
+                {info.education[0].description}
               </p>
             </Card>
 
@@ -127,12 +118,12 @@ export function About() {
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white">Sertifikalar</h4>
-                  <span className="text-xs text-gray-500">Uzmanlık & Eğitim Belgeleri</span>
+                  <h4 className="font-bold text-gray-900 dark:text-white">{t('about.certsBadge')}</h4>
+                  <span className="text-xs text-gray-500">{t('about.certsSubtitle')}</span>
                 </div>
               </div>
               <div className="space-y-3">
-                {personalInfo.certificates.map((cert, index) => {
+                {info.certificates.map((cert, index) => {
                   const Icon = iconMap[cert.icon] || Award;
                   return (
                     <div
@@ -158,19 +149,19 @@ export function About() {
           </motion.div>
         </div>
 
-        {/* Personal Interests Section (CV İlgi Alanları: Kamp, Satranç, Lego) */}
+        {/* Personal Interests Section */}
         <div>
           <div className="text-center mb-8">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-              Geliştiricinin Dünyası & İlgi Alanları
+              {t('about.interestsTitle')}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Kod satırlarının ötesinde bana ilham veren, odaklanmamı ve problem çözme yaklaşımımı besleyen aktiviteler.
+              {t('about.interestsSubtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {personalInfo.interests.map((interest, index) => {
+            {info.interests.map((interest, index) => {
               const Icon = iconMap[interest.icon] || Award;
               return (
                 <motion.div

@@ -1,14 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, Mail, ArrowRight, Github, Linkedin, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Download, Mail, ArrowRight, Github, Linkedin, MapPin } from 'lucide-react';
 import { personalInfo } from '../data/personal';
+import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/Button';
 
 export function Hero() {
+  const { language, t } = useLanguage();
+  const info = personalInfo[language];
+
   return (
     <section
       id="hero"
-      aria-label="Giriş Bölümü"
+      aria-label={t('nav.about')}
       className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
     >
       {/* Subtle Background Glow Orbs */}
@@ -29,11 +33,11 @@ export function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
             </span>
-            <span>Yeni Proje & Mimari Fırsatlarına Açık</span>
+            <span>{info.statusBadge}</span>
             <span className="text-gray-400 dark:text-gray-500">|</span>
             <span className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
               <MapPin className="w-3 h-3 text-accent" />
-              {personalInfo.location}
+              {info.location}
             </span>
           </motion.div>
 
@@ -44,9 +48,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white"
           >
-            Merhaba, ben <br className="hidden sm:inline" />
+            {t('hero.greeting')} <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-cyan-400 to-blue-500">
-              {personalInfo.name}
+              {info.name}
             </span>
           </motion.h1>
 
@@ -57,7 +61,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200"
           >
-            {personalInfo.title}
+            {info.title}
           </motion.p>
 
           {/* Tagline */}
@@ -67,7 +71,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto"
           >
-            {personalInfo.shortBio}
+            {info.shortBio}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -82,7 +86,7 @@ export function Hero() {
               size="lg"
               href="#projects"
             >
-              Projeleri İncele
+              {t('hero.viewProjects')}
               <ArrowRight className="w-4 h-4" />
             </Button>
 
@@ -92,20 +96,20 @@ export function Hero() {
               href="#contact"
             >
               <Mail className="w-4 h-4 text-accent" />
-              İletişime Geç
+              {t('hero.contactMe')}
             </Button>
 
             <Button
               variant="outline"
               size="lg"
-              href="/mucahit-tiryaki-cv.pdf"
+              href={info.resumeUrl}
               download
               target="_blank"
               rel="noopener noreferrer"
-              title="Mücahit Tiryaki CV'sini İndir"
+              title={t('hero.downloadCvTitle')}
             >
               <Download className="w-4 h-4" />
-              CV İndir
+              {t('hero.downloadCv')}
             </Button>
           </motion.div>
 
@@ -117,26 +121,26 @@ export function Hero() {
             className="mt-8 flex items-center justify-center gap-5 text-gray-500 dark:text-gray-400"
           >
             <a
-              href={personalInfo.github}
+              href={info.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub Profili"
+              aria-label={t('hero.ariaGithub')}
               className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
             >
               <Github className="w-5 h-5" />
             </a>
             <a
-              href={personalInfo.linkedin}
+              href={info.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn Profili"
+              aria-label={t('hero.ariaLinkedin')}
               className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
-              href={`mailto:${personalInfo.email}`}
-              aria-label="E-posta Gönder"
+              href={`mailto:${info.email}`}
+              aria-label={t('hero.ariaEmail')}
               className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
             >
               <Mail className="w-5 h-5" />
@@ -152,7 +156,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto"
         >
-          {personalInfo.stats.map((stat, index) => (
+          {info.stats.map((stat, index) => (
             <div
               key={index}
               className="p-4 rounded-2xl bg-white/70 dark:bg-dark-card/70 border border-gray-200/80 dark:border-dark-border/80 text-center backdrop-blur-sm shadow-sm"

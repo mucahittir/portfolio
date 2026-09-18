@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Menu, X, Terminal } from 'lucide-react';
+import { Moon, Sun, Menu, X, Terminal, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Navbar({ theme, toggleTheme }) {
+  const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   const navLinks = [
-    { name: 'Hakkımda', href: '#about' },
-    { name: 'Yetenekler', href: '#skills' },
-    { name: 'Deneyim', href: '#experience' },
-    { name: 'Projeler', href: '#projects' },
-    { name: 'İletişim', href: '#contact' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.experience'), href: '#experience' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.contact'), href: '#contact' },
   ];
 
   useEffect(() => {
@@ -67,7 +69,7 @@ export function Navbar({ theme, toggleTheme }) {
             const isActive = activeSection === link.href.substring(1);
             return (
               <a
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                   isActive
@@ -81,11 +83,29 @@ export function Navbar({ theme, toggleTheme }) {
           })}
         </nav>
 
-        {/* Action buttons (Theme toggle & Contact CTA) */}
-        <div className="flex items-center gap-2.5">
+        {/* Action buttons (Language switcher, Theme toggle & Contact CTA) */}
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Language Switcher */}
+          <button
+            onClick={toggleLanguage}
+            aria-label={t('nav.toggleLang')}
+            title={language === 'tr' ? 'Switch to English' : "Türkçe'ye Geç"}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-surface border border-gray-200/80 dark:border-dark-border transition-all cursor-pointer shadow-sm"
+          >
+            <Globe className="w-3.5 h-3.5 text-accent flex-shrink-0" />
+            <span className={language === 'tr' ? 'text-accent font-extrabold' : 'text-gray-400 dark:text-gray-500'}>
+              TR
+            </span>
+            <span className="text-gray-300 dark:text-gray-600 text-[10px]">/</span>
+            <span className={language === 'en' ? 'text-accent font-extrabold' : 'text-gray-400 dark:text-gray-500'}>
+              EN
+            </span>
+          </button>
+
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            aria-label="Temayı Değiştir"
+            aria-label={t('nav.toggleTheme')}
             className="p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-surface border border-transparent hover:border-gray-200 dark:hover:border-dark-border transition-all cursor-pointer"
           >
             {theme === 'dark' ? (
@@ -95,17 +115,18 @@ export function Navbar({ theme, toggleTheme }) {
             )}
           </button>
 
+          {/* Contact CTA */}
           <a
             href="#contact"
             className="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-xl bg-accent hover:bg-accent-hover text-white shadow-md shadow-accent/20 transition-all cursor-pointer"
           >
-            İletişime Geç
+            {t('nav.contactCta')}
           </a>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menüyü Aç/Kapat"
+            aria-label={t('nav.toggleMenu')}
             className="md:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-surface border border-gray-200 dark:border-dark-border cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -124,7 +145,7 @@ export function Navbar({ theme, toggleTheme }) {
           >
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-accent/10 hover:text-accent transition-colors"
@@ -132,13 +153,21 @@ export function Navbar({ theme, toggleTheme }) {
                 {link.name}
               </a>
             ))}
-            <div className="pt-2">
+
+            <div className="pt-3 border-t border-gray-100 dark:border-dark-border/60 flex flex-col gap-2">
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-bold rounded-xl bg-gray-100 dark:bg-dark-surface text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-dark-border"
+              >
+                <Globe className="w-4 h-4 text-accent" />
+                <span>{language === 'tr' ? 'Switch to English (EN)' : "Türkçe'ye Geç (TR)"}</span>
+              </button>
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-center w-full py-2.5 text-sm font-semibold rounded-xl bg-accent text-white shadow-md shadow-accent/20"
               >
-                İletişime Geç
+                {t('nav.contactCta')}
               </a>
             </div>
           </motion.div>

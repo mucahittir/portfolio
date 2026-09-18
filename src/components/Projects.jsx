@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Sparkles, Layers, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { projects, projectCategories } from '../data/projects';
+import { Github, Sparkles, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { projects, categoryFilters } from '../data/projects';
+import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
-import { Card } from './ui/Card';
 import { Badge } from './ui/Badge';
-import { Button } from './ui/Button';
 
 export function Projects() {
-  const [selectedCategory, setSelectedCategory] = useState('Tümü');
+  const { language, t } = useLanguage();
+  const [selectedCategoryId, setSelectedCategoryId] = useState('all');
 
-  const filteredProjects = selectedCategory === 'Tümü'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory);
+  const projectList = projects[language] || projects.tr;
+  const filteredProjects = selectedCategoryId === 'all'
+    ? projectList
+    : projectList.filter((p) => p.categoryId === selectedCategoryId);
 
   return (
     <section id="projects" className="py-20 relative">
@@ -20,24 +21,24 @@ export function Projects() {
         
         {/* Section Heading */}
         <SectionHeading
-          badge="Projeler"
-          title="Öne Çıkan Mimari & Mühendislik Projeleri"
-          subtitle="Kurumsal PLM platformlarından low-code mimarilere, otomatik çizelgeleme motorlarından oyun fiziğine uzanan çalışmalarım."
+          badge={t('projects.badge')}
+          title={t('projects.title')}
+          subtitle={t('projects.subtitle')}
         />
 
         {/* Category Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {projectCategories.map((category) => (
+          {categoryFilters.map((category) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
+              key={category.id}
+              onClick={() => setSelectedCategoryId(category.id)}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-                selectedCategory === category
+                selectedCategoryId === category.id
                   ? 'bg-accent text-white shadow-md shadow-accent/25'
                   : 'bg-white dark:bg-dark-card text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-surface border border-gray-200 dark:border-dark-border'
               }`}
             >
-              {category}
+              {category[language]}
             </button>
           ))}
         </div>
@@ -51,7 +52,7 @@ export function Projects() {
             {filteredProjects.map((project) => (
               <motion.div
                 layout
-                key={project.id}
+                key={`${project.id}-${language}`}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
@@ -69,7 +70,7 @@ export function Projects() {
                       {project.featured && (
                         <span className="flex items-center gap-1 text-[11px] font-bold text-amber-500 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
                           <Sparkles className="w-3 h-3" />
-                          Öne Çıkan
+                          {t('projects.featured')}
                         </span>
                       )}
                     </div>
@@ -116,7 +117,7 @@ export function Projects() {
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
                       >
                         <Github className="w-4 h-4" />
-                        <span>Kaynak Kod / Profil</span>
+                        <span>{t('projects.sourceCode')}</span>
                       </a>
 
                       {project.liveDemoUrl ? (
@@ -126,12 +127,12 @@ export function Projects() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
                         >
-                          <span>Canlı Önizleme</span>
+                          <span>{t('projects.liveDemo')}</span>
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </a>
                       ) : (
                         <span className="text-[11px] text-gray-400 dark:text-gray-500 italic">
-                          Kurumsal / Özel Mülk
+                          {t('projects.proprietary')}
                         </span>
                       )}
                     </div>

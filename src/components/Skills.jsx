@@ -6,15 +6,15 @@ import {
   Layout,
   Cpu,
   ShieldCheck,
-  CheckCircle2,
   Sparkles,
 } from 'lucide-react';
 import { skillCategories } from '../data/skills';
+import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
-import { Card } from './ui/Card';
 import { Badge } from './ui/Badge';
 
 export function Skills() {
+  const { language, t } = useLanguage();
   const [activeCategoryId, setActiveCategoryId] = useState('backend');
 
   const categoryIcons = {
@@ -25,7 +25,8 @@ export function Skills() {
     methodology: ShieldCheck,
   };
 
-  const currentCategory = skillCategories.find(c => c.id === activeCategoryId) || skillCategories[0];
+  const categories = skillCategories[language] || skillCategories.tr;
+  const currentCategory = categories.find(c => c.id === activeCategoryId) || categories[0];
 
   return (
     <section id="skills" className="py-20 relative">
@@ -33,14 +34,14 @@ export function Skills() {
         
         {/* Section Heading */}
         <SectionHeading
-          badge="Yetenekler & Beceriler"
-          title="Teknoloji Yığını & Mimari Yetkinlikler"
-          subtitle=".NET Core ekosisteminden kurumsal veritabanlarına, modern ön yüzden bulut entegrasyonlarına uçtan uca teknik yetkinlikler."
+          badge={t('skills.badge')}
+          title={t('skills.title')}
+          subtitle={t('skills.subtitle')}
         />
 
         {/* Category Navigation Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
-          {skillCategories.map((category) => {
+          {categories.map((category) => {
             const Icon = categoryIcons[category.id] || Server;
             const isActive = activeCategoryId === category.id;
 
@@ -65,7 +66,7 @@ export function Skills() {
         <div className="max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentCategory.id}
+              key={`${currentCategory.id}-${language}`}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -82,7 +83,7 @@ export function Skills() {
                   </p>
                 </div>
                 <Badge variant="accent" className="self-start sm:self-auto">
-                  {currentCategory.skills.length} Yetkinlik
+                  {currentCategory.skills.length} {t('skills.countSuffix')}
                 </Badge>
               </div>
 

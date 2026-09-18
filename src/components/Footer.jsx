@@ -1,11 +1,23 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail, Terminal, Heart } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Terminal } from 'lucide-react';
 import { personalInfo } from '../data/personal';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Footer() {
+  const { language, t } = useLanguage();
+  const info = personalInfo[language] || personalInfo.tr;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const navLinks = [
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.experience'), href: '#experience' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.contact'), href: '#contact' },
+  ];
 
   return (
     <footer className="border-t border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg py-12 transition-colors">
@@ -19,29 +31,33 @@ export function Footer() {
               <span className="p-1 rounded-md bg-accent/10 text-accent">
                 <Terminal className="w-4 h-4" />
               </span>
-              <span>{personalInfo.name}</span>
+              <span>{info.name}</span>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 max-w-sm">
-              {personalInfo.title} • Temiz kod, sağlam mimari ve yüksek performans.
+              {info.title} • {t('footer.tagline')}
             </p>
           </div>
 
           {/* Nav Quick Links */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-medium text-gray-600 dark:text-gray-400">
-            <a href="#about" className="hover:text-accent transition-colors">Hakkımda</a>
-            <a href="#skills" className="hover:text-accent transition-colors">Yetenekler</a>
-            <a href="#experience" className="hover:text-accent transition-colors">Deneyim</a>
-            <a href="#projects" className="hover:text-accent transition-colors">Projeler</a>
-            <a href="#contact" className="hover:text-accent transition-colors">İletişim</a>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="hover:text-accent transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
           </div>
 
           {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            aria-label="Yukarı Kaydır"
+            aria-label={t('footer.backToTop')}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-dark-card hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white border border-gray-200 dark:border-dark-border transition-all cursor-pointer"
           >
-            <span>Yukarı</span>
+            <span>{t('footer.backToTop')}</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -49,11 +65,11 @@ export function Footer() {
         {/* Bottom copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 dark:text-gray-400">
           <p>
-            © {new Date().getFullYear()} {personalInfo.name}. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} {info.name}. {t('footer.allRightsReserved')}
           </p>
           <div className="flex items-center gap-4">
             <a
-              href={personalInfo.github}
+              href={info.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -62,7 +78,7 @@ export function Footer() {
               <Github className="w-4 h-4" />
             </a>
             <a
-              href={personalInfo.linkedin}
+              href={info.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -71,7 +87,7 @@ export function Footer() {
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              href={`mailto:${personalInfo.email}`}
+              href={`mailto:${info.email}`}
               aria-label="Email"
               className="hover:text-accent transition-colors"
             >

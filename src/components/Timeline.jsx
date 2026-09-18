@@ -1,27 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/experience';
+import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
 import { Badge } from './ui/Badge';
 
 export function Timeline() {
+  const { language, t } = useLanguage();
+  const expList = experiences[language] || experiences.tr;
+
   return (
     <section id="experience" className="py-20 bg-gray-50/50 dark:bg-dark-bg/50 relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
         <SectionHeading
-          badge="Deneyim"
-          title="Kariyer & Profesyonel Yolculuk"
-          subtitle="4 yıllık yazılım geliştirme sürecimde kurumsal şirketlerde ve oyun stüdyolarında üstlendiğim roller."
+          badge={t('timeline.badge')}
+          title={t('timeline.title')}
+          subtitle={t('timeline.subtitle')}
         />
 
         {/* Vertical Timeline */}
         <div className="relative border-l-2 border-gray-200 dark:border-dark-border ml-3 sm:ml-6 md:ml-8 space-y-12">
-          {experiences.map((exp, index) => (
+          {expList.map((exp, index) => (
             <motion.div
-              key={exp.id}
+              key={`${exp.id}-${language}`}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -49,7 +53,7 @@ export function Timeline() {
                       </h3>
                       {exp.isCurrent && (
                         <span className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
-                          Güncel
+                          {t('timeline.currentBadge')}
                         </span>
                       )}
                     </div>
