@@ -1,15 +1,11 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail, Terminal } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 import { useLanguage } from '../context/LanguageContext';
 
 export function Footer() {
   const { language, t } = useLanguage();
   const info = personalInfo[language] || personalInfo.tr;
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const navLinks = [
     { name: t('nav.about'), href: '#about' },
@@ -19,83 +15,61 @@ export function Footer() {
     { name: t('nav.contact'), href: '#contact' },
   ];
 
+  const socials = [
+    { label: 'GitHub', href: info.github, Icon: Github, external: true },
+    { label: 'LinkedIn', href: info.linkedin, Icon: Linkedin, external: true },
+    { label: 'Email', href: `mailto:${info.email}`, Icon: Mail },
+  ];
+
   return (
-    <footer className="border-t border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg py-12 transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-gray-100 dark:border-dark-border/60">
-          
-          {/* Brand & Tagline */}
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2 font-extrabold text-xl tracking-tight text-gray-900 dark:text-white">
-              <span className="p-1 rounded-md bg-accent/10 text-accent">
-                <Terminal className="w-4 h-4" />
-              </span>
-              <span>{info.name}</span>
-            </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 max-w-sm">
-              {info.title} • {t('footer.tagline')}
+    <footer className="border-t border-ink/10 py-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p className="text-lg font-medium text-ink">{info.name}</p>
+            <p className="mt-2 max-w-sm text-sm text-ink2">
+              {info.title}. {t('footer.tagline')}
             </p>
           </div>
 
-          {/* Nav Quick Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-medium text-gray-600 dark:text-gray-400">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink2">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="hover:text-accent transition-colors"
-              >
-                {link.name}
-              </a>
+              <li key={link.href}>
+                <a href={link.href} className="transition-colors duration-150 hover:text-ink">
+                  {link.name}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Back to top button */}
-          <button
-            onClick={scrollToTop}
-            aria-label={t('footer.backToTop')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-dark-card hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white border border-gray-200 dark:border-dark-border transition-all cursor-pointer"
+          <a
+            href="#hero"
+            className="inline-flex h-8 w-fit items-center gap-2 rounded-lg border border-ink/10 bg-raised px-3 text-sm text-ink transition-colors duration-150 hover:border-ink/20"
           >
-            <span>{t('footer.backToTop')}</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+            {t('footer.backToTop')}
+            <ArrowUp className="h-4 w-4" strokeWidth={1.5} />
+          </a>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 dark:text-gray-400">
-          <p>
+        <div className="mt-8 flex flex-col gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="meta">
             © {new Date().getFullYear()} {info.name}. {t('footer.allRightsReserved')}
           </p>
-          <div className="flex items-center gap-4">
-            <a
-              href={info.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="hover:text-accent transition-colors"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-            <a
-              href={info.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="hover:text-accent transition-colors"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a
-              href={`mailto:${info.email}`}
-              aria-label="Email"
-              className="hover:text-accent transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-          </div>
+          <ul className="flex items-center gap-4">
+            {socials.map(({ label, href, Icon, external }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  aria-label={label}
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="text-ink3 transition-colors duration-150 hover:text-ink"
+                >
+                  <Icon className="h-4 w-4" strokeWidth={1.5} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-
       </div>
     </footer>
   );

@@ -1,46 +1,35 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Server,
-  Database,
-  Layout,
-  Cpu,
-  ShieldCheck,
-  Sparkles,
-} from 'lucide-react';
+import { Server, Database, Layout, Cpu, ShieldCheck } from 'lucide-react';
 import { skillCategories } from '../data/skills';
 import { useLanguage } from '../context/LanguageContext';
 import { SectionHeading } from './ui/SectionHeading';
-import { Badge } from './ui/Badge';
+
+const categoryIcons = {
+  backend: Server,
+  database: Database,
+  frontend: Layout,
+  devops: Cpu,
+  methodology: ShieldCheck,
+};
 
 export function Skills() {
   const { language, t } = useLanguage();
   const [activeCategoryId, setActiveCategoryId] = useState('backend');
 
-  const categoryIcons = {
-    backend: Server,
-    database: Database,
-    frontend: Layout,
-    devops: Cpu,
-    methodology: ShieldCheck,
-  };
-
   const categories = skillCategories[language] || skillCategories.tr;
-  const currentCategory = categories.find(c => c.id === activeCategoryId) || categories[0];
+  const currentCategory = categories.find((c) => c.id === activeCategoryId) || categories[0];
 
   return (
-    <section id="skills" className="py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Heading */}
+    <section id="skills" className="py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge={t('skills.badge')}
           title={t('skills.title')}
           subtitle={t('skills.subtitle')}
         />
 
-        {/* Category Navigation Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+        <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" role="tablist">
           {categories.map((category) => {
             const Icon = categoryIcons[category.id] || Server;
             const isActive = activeCategoryId === category.id;
@@ -48,88 +37,62 @@ export function Skills() {
             return (
               <button
                 key={category.id}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveCategoryId(category.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`inline-flex h-9 flex-shrink-0 items-center gap-2 whitespace-nowrap rounded-lg border px-3 text-sm transition-colors duration-150 cursor-pointer ${
                   isActive
-                    ? 'bg-accent text-white shadow-lg shadow-accent/25 scale-105'
-                    : 'bg-white dark:bg-dark-card text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-surface border border-gray-200 dark:border-dark-border'
+                    ? 'border-ink/20 bg-raised text-ink'
+                    : 'border-transparent text-ink2 hover:text-ink'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                <span>{category.name}</span>
+                <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+                {category.name}
               </button>
             );
           })}
         </div>
 
-        {/* Active Category Content Display */}
-        <div className="max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${currentCategory.id}-${language}`}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-dark-card border border-gray-200/90 dark:border-dark-border shadow-sm"
-            >
-              <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-gray-100 dark:border-dark-border/60">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    {currentCategory.name}
-                  </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-                    {currentCategory.description}
-                  </p>
-                </div>
-                <Badge variant="accent" className="self-start sm:self-auto">
-                  {currentCategory.skills.length} {t('skills.countSuffix')}
-                </Badge>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${currentCategory.id}-${language}`}
+            role="tabpanel"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="surface p-6 sm:p-8"
+          >
+            <div className="mb-8 flex flex-col gap-1 border-b border-ink/10 pb-6 sm:flex-row sm:items-baseline sm:justify-between">
+              <div>
+                <h3 className="text-xl font-medium text-ink">{currentCategory.name}</h3>
+                <p className="mt-1 text-sm text-ink2">{currentCategory.description}</p>
               </div>
+              <span className="meta">
+                {currentCategory.skills.length} {t('skills.countSuffix')}
+              </span>
+            </div>
 
-              {/* Skills Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {currentCategory.skills.map((skill, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-4 rounded-xl border transition-all ${
-                      skill.highlighted
-                        ? 'bg-accent/5 dark:bg-accent/5 border-accent/30 dark:border-accent/30 shadow-sm'
-                        : 'bg-gray-50 dark:bg-dark-surface border-gray-200/60 dark:border-dark-border/60'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-sm text-gray-900 dark:text-white flex items-center gap-1.5">
-                        {skill.highlighted && (
-                          <Sparkles className="w-3.5 h-3.5 text-accent" />
-                        )}
-                        {skill.name}
-                      </span>
-                      <span className="text-xs font-mono font-bold text-accent">
-                        {skill.level}%
-                      </span>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="w-full h-2 rounded-full bg-gray-200 dark:bg-dark-border overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className={`h-full rounded-full ${
-                          skill.highlighted
-                            ? 'bg-gradient-to-r from-accent to-cyan-400'
-                            : 'bg-gray-400 dark:bg-gray-500'
-                        }`}
-                      />
-                    </div>
+            <ul className="grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2">
+              {currentCategory.skills.map((skill) => (
+                <li key={skill.name}>
+                  <div className="mb-2 flex items-baseline justify-between gap-4">
+                    <span className="text-sm text-ink">{skill.name}</span>
+                    <span className="meta tabular-nums">{skill.level}%</span>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
+                  <div className="h-1 w-full overflow-hidden rounded-sm bg-ink/10">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${skill.level}%` }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className={`h-full rounded-sm ${skill.highlighted ? 'bg-accent' : 'bg-ink3'}`}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

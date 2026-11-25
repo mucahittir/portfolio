@@ -2,18 +2,18 @@ export const personalInfo = {
   tr: {
     name: "Mücahit Tiryaki",
     title: "Full Stack & Backend Developer",
-    shortBio: "4 yıllık deneyim ile .NET Core, Mikroservis Mimarisi ve modern web ekosisteminde yüksek ölçeklenebilir, temiz kodlu ve güvenilir yazılım çözümleri üretiyorum.",
-    statusBadge: "Yeni Proje & Mimari Fırsatlarına Açık",
+    shortBio: "4 yıllık deneyim: .NET Core, mikroservis mimarisi ve MSSQL ile ölçeklenebilir, temiz kodlu sistemler.",
+    statusBadge: "Yeni projelere açık",
     location: "Ankara, Türkiye",
     email: "mucahittiryaki11@gmail.com",
     github: "https://github.com/mucahittir",
     linkedin: "https://linkedin.com/in/mucahittir",
     resumeUrl: "/mucahit-tiryaki-cv.pdf",
     stats: [
-      { label: "Yıl Deneyim", value: "4+" },
-      { label: "Şirket & Proje", value: "5+" },
-      { label: "Mimari Yaklaşım", value: "SOLID / Clean Code" },
-      { label: "Uzmanlık Alanı", value: ".NET & Full Stack" }
+      { label: "Yıl deneyim", value: "4+" },
+      { label: "Şirket ve proje", value: "5+" },
+      { label: "Mimari yaklaşım", value: "SOLID / Clean Code" },
+      { label: "Uzmanlık alanı", value: ".NET ve Full Stack" }
     ],
     bioParagraphs: [
       "Yazılım geliştirme alanında 4 yıllık deneyime sahip bir geliştiriciyim. Mobil oyun geliştirmeden kurumsal seviyede backend ve full-stack sistemler geliştirmeye uzanan bir yolculuğum var.",
@@ -21,10 +21,10 @@ export const personalInfo = {
       "SOLID, DRY ve KISS prensiplerine sadık kalarak, modüler, test edilebilir ve sürdürülebilir kod üretmeye odaklanırım. Mimari problemleri çözebileceğim ve doğru teknoloji seçimlerine liderlik edebileceğim projeler geliştirmeyi amaçlıyorum."
     ],
     storyHighlights: [
-      "Kök Neden Analizi & Debugging",
-      "SOLID & Clean Architecture",
-      "Yüksek Performanslı MSSQL Sorguları",
-      "Docker & Mikroservis Entegrasyonu"
+      "Kök neden analizi ve debugging",
+      "SOLID ve Clean Architecture",
+      "Yüksek performanslı MSSQL sorguları",
+      "Docker ve mikroservis entegrasyonu"
     ],
     education: [
       {
@@ -36,29 +36,29 @@ export const personalInfo = {
     ],
     certificates: [
       {
-        title: "Oyun Geliştirme Kampı Katılım Sertifikası",
+        title: "Oyun geliştirme kampı katılım sertifikası",
         issuer: "Bilişim Vadisi",
         icon: "Award"
       },
       {
-        title: "Unity ile Dijital Oyun Geliştirmeye Giriş",
+        title: "Unity ile dijital oyun geliştirmeye giriş",
         issuer: "BTK Akademi",
         icon: "Gamepad2"
       },
       {
-        title: "Yazılım Geliştirici Sertifikası",
+        title: "Yazılım geliştirici sertifikası",
         issuer: "SAYEM",
         icon: "Code2"
       },
       {
-        title: "Upper-Intermediate Seviye İngilizce",
+        title: "Upper-intermediate seviye İngilizce",
         issuer: "English Time",
         icon: "Languages"
       }
     ],
     interests: [
       {
-        title: "Kamp & Doğa",
+        title: "Kamp ve doğa",
         description: "Doğada vakit geçirmek bana huzur veriyor, zihnimi arındırmak için yılda iki kez kampa çıkarım.",
         icon: "Tent"
       },
@@ -68,7 +68,7 @@ export const personalInfo = {
         icon: "Swords"
       },
       {
-        title: "Lego & Model",
+        title: "Lego ve model",
         description: "Parçaları birleştirip büyük resmi ortaya çıkarmaktan ve modüler mimariler kurmaktan keyif alıyorum.",
         icon: "Puzzle"
       }
@@ -77,18 +77,18 @@ export const personalInfo = {
   en: {
     name: "Mücahit Tiryaki",
     title: "Full Stack & Backend Developer",
-    shortBio: "With 4 years of experience, I engineer highly scalable, clean-coded, and resilient software solutions across .NET Core, Microservices Architecture, and modern web ecosystems.",
-    statusBadge: "Open to New Projects & Architecture Roles",
+    shortBio: "Four years with .NET Core, microservices and MSSQL: scalable, clean-code systems.",
+    statusBadge: "Open to new projects",
     location: "Ankara, Turkey",
     email: "mucahittiryaki11@gmail.com",
     github: "https://github.com/mucahittir",
     linkedin: "https://linkedin.com/in/mucahittir",
     resumeUrl: "/mucahit-tiryaki-cv.pdf",
     stats: [
-      { label: "Years Experience", value: "4+" },
-      { label: "Companies & Projects", value: "5+" },
-      { label: "Architectural Approach", value: "SOLID / Clean Code" },
-      { label: "Core Expertise", value: ".NET & Full Stack" }
+      { label: "Years of experience", value: "4+" },
+      { label: "Companies and projects", value: "5+" },
+      { label: "Architectural approach", value: "SOLID / Clean Code" },
+      { label: "Core expertise", value: ".NET and Full Stack" }
     ],
     bioParagraphs: [
       "I am a software engineer with 4 years of experience. My technical journey extends from mobile game development to engineering enterprise-grade backend and full-stack systems.",
@@ -96,10 +96,10 @@ export const personalInfo = {
       "Committed to SOLID, DRY, and KISS principles, I focus on crafting modular, testable, and maintainable code. I aim to build high-impact projects where I can tackle architectural problems and guide sound technology decisions."
     ],
     storyHighlights: [
-      "Root Cause Analysis & Debugging",
-      "SOLID & Clean Architecture",
-      "High-Performance MSSQL Queries",
-      "Docker & Microservices Integration"
+      "Root cause analysis and debugging",
+      "SOLID and Clean Architecture",
+      "High-performance MSSQL queries",
+      "Docker and microservices integration"
     ],
     education: [
       {
@@ -111,29 +111,29 @@ export const personalInfo = {
     ],
     certificates: [
       {
-        title: "Game Development BootCamp Certificate",
+        title: "Game development bootcamp certificate",
         issuer: "Informatics Valley (Bilişim Vadisi)",
         icon: "Award"
       },
       {
-        title: "Intro to Digital Game Development with Unity",
+        title: "Intro to digital game development with Unity",
         issuer: "BTK Academy",
         icon: "Gamepad2"
       },
       {
-        title: "Software Developer Certificate",
+        title: "Software developer certificate",
         issuer: "SAYEM",
         icon: "Code2"
       },
       {
-        title: "Upper-Intermediate English Proficiency",
+        title: "Upper-intermediate English proficiency",
         issuer: "English Time",
         icon: "Languages"
       }
     ],
     interests: [
       {
-        title: "Camping & Outdoors",
+        title: "Camping and outdoors",
         description: "Spending time in nature brings peace of mind; I go camping twice a year to clear my thoughts and recharge.",
         icon: "Tent"
       },
@@ -143,7 +143,7 @@ export const personalInfo = {
         icon: "Swords"
       },
       {
-        title: "Lego & Modeling",
+        title: "Lego and modeling",
         description: "I enjoy assembling components into a cohesive big picture and constructing modular structures.",
         icon: "Puzzle"
       }

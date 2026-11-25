@@ -1,14 +1,14 @@
 export const projectCategories = {
-  tr: ["Tümü", "Backend & Mimari", "Full Stack", "Algoritma & Araçlar", "Oyun & Fizik"],
-  en: ["All", "Backend & Architecture", "Full Stack", "Algorithms & Tools", "Game & Physics"]
+  tr: ["Tümü", "Backend ve mimari", "Full Stack", "Algoritma ve araçlar", "Oyun ve fizik"],
+  en: ["All", "Backend and architecture", "Full Stack", "Algorithms and tools", "Game and physics"]
 };
 
 export const categoryFilters = [
   { id: "all", tr: "Tümü", en: "All" },
-  { id: "backend", tr: "Backend & Mimari", en: "Backend & Architecture" },
+  { id: "backend", tr: "Backend ve mimari", en: "Backend and architecture" },
   { id: "fullstack", tr: "Full Stack", en: "Full Stack" },
-  { id: "algorithms", tr: "Algoritma & Araçlar", en: "Algorithms & Tools" },
-  { id: "games", tr: "Oyun & Fizik", en: "Game & Physics" }
+  { id: "algorithms", tr: "Algoritma ve araçlar", en: "Algorithms and tools" },
+  { id: "games", tr: "Oyun ve fizik", en: "Game and physics" }
 ];
 
 export const projects = {
@@ -16,8 +16,8 @@ export const projects = {
     {
       id: "plm-backend",
       categoryId: "backend",
-      title: "Kurumsal PLM Backend & Bilet/Depo Yönetimi",
-      category: "Backend & Mimari",
+      title: "Kurumsal PLM backend ve bilet/depo yönetimi",
+      category: "Backend ve mimari",
       description: "Ürün Yaşam Döngüsü Yönetimi (PLM) platformu için .NET Core tabanlı, yüksek işlem hacimli iş süreçlerini ve bilet/depo akışlarını yöneten kurumsal backend mimarisi.",
       highlights: [
         "Kritik Yönetimi (Ticket Sistemi) ve Depo Yönetimi modüllerinin uçtan uca backend mimarisi",
@@ -33,7 +33,7 @@ export const projects = {
     {
       id: "synergy-virtual-drive",
       categoryId: "fullstack",
-      title: "Synergy Sanal Disk & Kurumsal Doküman Yönetimi",
+      title: "Synergy sanal disk ve kurumsal doküman yönetimi",
       category: "Full Stack",
       description: "Kurumsal verilerin güvenli depolanması ve milisaniyeler içinde hızlı erişimi için geliştirilmiş özelleştirilmiş 'Sanal Disk' (Virtual Drive) eklentisi ve yönetim konsolu.",
       highlights: [
@@ -50,8 +50,8 @@ export const projects = {
     {
       id: "exam-scheduler-algorithm",
       categoryId: "algorithms",
-      title: "Akıllı Sınav Planlama & Otomatik Çizelgeleme Motoru",
-      category: "Algoritma & Araçlar",
+      title: "Akıllı sınav planlama ve otomatik çizelgeleme motoru",
+      category: "Algoritma ve araçlar",
       description: "Üniversite ve enstitülerde günlerce süren manuel sınav planlama ve gözetmen atama süreçlerini %100 otomatize eden kural tabanlı optimizasyon algoritması.",
       highlights: [
         "Çakışmaları (öğrenci ders çakışması, derslik kapasitesi, gözetmen müsaitliği) sıfıra indiren matematiksel çizelgeleme",
@@ -66,8 +66,8 @@ export const projects = {
     {
       id: "game-framework-ragdoll",
       categoryId: "games",
-      title: "Modüler Oyun Geliştirme Çatısı & Ragdoll Fizik Paketi",
-      category: "Oyun & Fizik",
+      title: "Modüler oyun geliştirme çatısı ve ragdoll fizik paketi",
+      category: "Oyun ve fizik",
       description: "Mobil oyun stüdyolarında oyun prototipleme ve üretim hızını artıran, yeniden kullanılabilir 'Hypercasual Game Template' ve özel ragdoll fizik motoru eklentisi.",
       highlights: [
         "Particle sistemleri ve 3D modeller için GPU/CPU bellek optimizasyonları",
@@ -83,8 +83,8 @@ export const projects = {
     {
       id: "event-driven-microservices",
       categoryId: "backend",
-      title: "Dağıtık Mikroservis & Event-Driven Mesajlaşma Servisi",
-      category: "Backend & Mimari",
+      title: "Dağıtık mikroservis ve event-driven mesajlaşma servisi",
+      category: "Backend ve mimari",
       description: "Asenkron mesaj kuyrukları, JWT yetkilendirme ve WebSocket canlı veri akışları barındıran ölçeklenebilir mikroservis mimarisi gösterim projesi.",
       highlights: [
         "RabbitMQ tabanlı event-driven mesajlaşma ve gevşek bağlı (loosely-coupled) servisler",
@@ -102,8 +102,8 @@ export const projects = {
     {
       id: "plm-backend",
       categoryId: "backend",
-      title: "Enterprise PLM Backend & Ticket/Warehouse Management",
-      category: "Backend & Architecture",
+      title: "Enterprise PLM backend and ticket/warehouse management",
+      category: "Backend and architecture",
       description: "Enterprise backend architecture built with .NET Core for a Product Lifecycle Management (PLM) platform managing high-throughput business workflows and warehouse systems.",
       highlights: [
         "End-to-end backend architecture for Issue Tracking (Ticket System) and Warehouse Management modules",
@@ -119,7 +119,7 @@ export const projects = {
     {
       id: "synergy-virtual-drive",
       categoryId: "fullstack",
-      title: "Synergy Virtual Drive & Enterprise Document Management",
+      title: "Synergy Virtual Drive and enterprise document management",
       category: "Full Stack",
       description: "Custom 'Virtual Drive' extension and administration console built for secure corporate data storage and sub-millisecond retrieval.",
       highlights: [
@@ -136,8 +136,8 @@ export const projects = {
     {
       id: "exam-scheduler-algorithm",
       categoryId: "algorithms",
-      title: "Smart Exam Scheduler & Automated Optimization Engine",
-      category: "Algorithms & Tools",
+      title: "Smart exam scheduler and automated optimization engine",
+      category: "Algorithms and tools",
       description: "Rule-based optimization algorithm completely automating days of manual university exam scheduling and proctor assignments.",
       highlights: [
         "Mathematical constraint solver eliminating clashes across student schedules, room capacities, and proctor availability",
@@ -152,8 +152,8 @@ export const projects = {
     {
       id: "game-framework-ragdoll",
       categoryId: "games",
-      title: "Modular Game Framework & Ragdoll Physics Package",
-      category: "Game & Physics",
+      title: "Modular game framework and ragdoll physics package",
+      category: "Game and physics",
       description: "Reusable 'Hypercasual Game Template' and custom ragdoll physics package accelerating prototyping and production cycles in mobile game studios.",
       highlights: [
         "Particle system and 3D asset memory profiling and compute optimization for mobile GPUs/CPUs",
@@ -169,8 +169,8 @@ export const projects = {
     {
       id: "event-driven-microservices",
       categoryId: "backend",
-      title: "Distributed Microservices & Event-Driven Messaging",
-      category: "Backend & Architecture",
+      title: "Distributed microservices and event-driven messaging",
+      category: "Backend and architecture",
       description: "Scalable microservices showcase featuring asynchronous message queues, JWT authentication, and real-time WebSocket data streaming.",
       highlights: [
         "RabbitMQ-based event-driven messaging with loosely coupled, resilient service boundaries",

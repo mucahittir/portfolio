@@ -1,9 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, Mail, ArrowRight, Github, Linkedin, MapPin } from 'lucide-react';
+import { Download, ArrowRight } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/Button';
+import { ServiceMap } from './ServiceMap';
+
+const ease = [0.22, 1, 0.36, 1];
+
+/** Fade and short rise on load, staggered by `order`. */
+function Enter({ order = 0, className = '', children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: order * 0.06, ease }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export function Hero() {
   const { language, t } = useLanguage();
@@ -13,163 +30,65 @@ export function Hero() {
     <section
       id="hero"
       aria-label={t('nav.about')}
-      className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
+      className="flex min-h-[100svh] flex-col justify-center pb-12 pt-32 lg:pt-28"
     >
-      {/* Subtle Background Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/15 dark:bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-72 h-72 bg-blue-500/10 dark:bg-blue-600/5 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <Enter order={0} className="flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-positive" aria-hidden="true" />
+              <p className="meta">
+                {info.statusBadge} · {info.location}
+              </p>
+            </Enter>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center max-w-3xl mx-auto">
-          
-          {/* Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/25 text-accent text-xs sm:text-sm font-medium mb-6"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-            </span>
-            <span>{info.statusBadge}</span>
-            <span className="text-gray-400 dark:text-gray-500">|</span>
-            <span className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-              <MapPin className="w-3 h-3 text-accent" />
-              {info.location}
-            </span>
-          </motion.div>
+            <Enter order={1}>
+              <h1 className="mt-6 text-display text-ink">{t('hero.headline')}</h1>
+            </Enter>
 
-          {/* Main Hero Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white"
-          >
-            {t('hero.greeting')} <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-cyan-400 to-blue-500">
-              {info.name}
-            </span>
-          </motion.h1>
+            <Enter order={2}>
+              <p className="mt-6 text-lg text-ink2 sm:text-xl sm:leading-8">
+                <span className="text-ink">{info.name}</span>, {info.title}. {info.shortBio}
+              </p>
+            </Enter>
 
-          {/* Subtitle / Role */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200"
-          >
-            {info.title}
-          </motion.p>
+            <Enter order={3} className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <Button variant="primary" size="lg" href="#projects">
+                {t('hero.viewProjects')}
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </Button>
+              <Button variant="secondary" size="lg" href="#contact">
+                {t('hero.contactMe')}
+              </Button>
+              <Button
+                variant="ghost"
+                size="lg"
+                href={info.resumeUrl}
+                download
+                title={t('hero.downloadCvTitle')}
+              >
+                <Download className="h-4 w-4" strokeWidth={1.5} />
+                {t('hero.downloadCv')}
+              </Button>
+            </Enter>
+          </div>
 
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto"
-          >
-            {info.shortBio}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
-          >
-            <Button
-              variant="primary"
-              size="lg"
-              href="#projects"
-            >
-              {t('hero.viewProjects')}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-
-            <Button
-              variant="secondary"
-              size="lg"
-              href="#contact"
-            >
-              <Mail className="w-4 h-4 text-accent" />
-              {t('hero.contactMe')}
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              href={info.resumeUrl}
-              download
-              target="_blank"
-              rel="noopener noreferrer"
-              title={t('hero.downloadCvTitle')}
-            >
-              <Download className="w-4 h-4" />
-              {t('hero.downloadCv')}
-            </Button>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-8 flex items-center justify-center gap-5 text-gray-500 dark:text-gray-400"
-          >
-            <a
-              href={info.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t('hero.ariaGithub')}
-              className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href={info.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t('hero.ariaLinkedin')}
-              className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href={`mailto:${info.email}`}
-              aria-label={t('hero.ariaEmail')}
-              className="p-2 rounded-xl hover:text-accent hover:bg-accent/10 transition-all"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-          </motion.div>
+          <Enter order={4} className="lg:col-span-6">
+            <ServiceMap />
+          </Enter>
         </div>
 
-        {/* Highlight Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto"
-        >
-          {info.stats.map((stat, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-2xl bg-white/70 dark:bg-dark-card/70 border border-gray-200/80 dark:border-dark-border/80 text-center backdrop-blur-sm shadow-sm"
-            >
-              <div className="text-2xl sm:text-3xl font-extrabold text-accent">
-                {stat.value}
+        {/* Facts */}
+        <Enter order={5}>
+          <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8 lg:grid-cols-4">
+            {info.stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col-reverse gap-1">
+                <dt className="meta">{stat.label}</dt>
+                <dd className="text-xl font-medium tabular-nums text-ink">{stat.value}</dd>
               </div>
-              <div className="mt-1 text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </dl>
+        </Enter>
       </div>
     </section>
   );

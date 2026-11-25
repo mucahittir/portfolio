@@ -1,14 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
- * Reusable Button component with variant styles and smooth Framer Motion interactions.
+ * Button / link-button. Same radius and focus treatment everywhere.
  * @param {Object} props
- * @param {'primary' | 'secondary' | 'outline' | 'ghost'} [props.variant='primary']
+ * @param {'primary' | 'secondary' | 'ghost'} [props.variant='primary']
  * @param {'sm' | 'md' | 'lg'} [props.size='md']
- * @param {string} [props.className='']
- * @param {React.ReactNode} props.children
- * @param {string} [props.href]
+ * @param {string} [props.href] Renders an anchor when provided.
  */
 export function Button({
   variant = 'primary',
@@ -16,50 +13,38 @@ export function Button({
   className = '',
   children,
   href,
-  onClick,
   ...props
 }) {
-  const baseStyles = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  const base =
+    'inline-flex select-none items-center justify-center rounded-[10px] font-medium cursor-pointer ' +
+    'transition-[transform,background-color,border-color,color] duration-150 ease-out active:scale-[0.98] ' +
+    'disabled:pointer-events-none disabled:opacity-50';
 
-  const sizeStyles = {
-    sm: "px-3.5 py-1.5 text-xs gap-1.5",
-    md: "px-5 py-2.5 text-sm gap-2",
-    lg: "px-6 py-3.5 text-base gap-2.5 font-semibold",
+  const sizes = {
+    sm: 'h-8 gap-2 px-3 text-sm',
+    md: 'h-10 gap-2 px-4 text-sm',
+    lg: 'h-12 gap-2 px-5 text-base',
   };
 
-  const variantStyles = {
-    primary: "bg-accent hover:bg-accent-hover text-white shadow-lg shadow-accent/20 hover:shadow-accent/35 border border-accent/40",
-    secondary: "bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-dark-surface dark:hover:bg-dark-surface/80 dark:text-gray-200 border border-gray-200 dark:border-dark-border",
-    outline: "bg-transparent hover:bg-accent/10 text-accent border border-accent/60 hover:border-accent",
-    ghost: "bg-transparent hover:bg-gray-100 dark:hover:bg-dark-surface text-gray-600 dark:text-gray-300",
+  const variants = {
+    primary: 'bg-ink text-page hover:bg-ink/85',
+    secondary: 'border border-ink/10 bg-raised text-ink hover:border-ink/20',
+    ghost: 'text-ink2 hover:text-ink',
   };
 
-  const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+  const classes = `${base} ${sizes[size]} ${variants[variant] || variants.primary} ${className}`;
 
   if (href) {
     return (
-      <motion.a
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        href={href}
-        className={combinedClasses}
-        onClick={onClick}
-        {...props}
-      >
+      <a href={href} className={classes} {...props}>
         {children}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={combinedClasses}
-      onClick={onClick}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {children}
-    </motion.button>
+    </button>
   );
 }

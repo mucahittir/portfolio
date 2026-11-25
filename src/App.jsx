@@ -1,4 +1,5 @@
 import React from 'react';
+import { MotionConfig } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
 import { LanguageProvider } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
@@ -14,7 +15,7 @@ function PortfolioContent() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-dark-bg dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-page text-ink">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Hero />
@@ -32,7 +33,9 @@ function PortfolioContent() {
 export function App() {
   return (
     <LanguageProvider>
-      <PortfolioContent />
+      <MotionConfig reducedMotion="user">
+        <PortfolioContent />
+      </MotionConfig>
     </LanguageProvider>
   );
 }

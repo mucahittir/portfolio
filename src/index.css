@@ -4,11 +4,48 @@
 
 @layer base {
   html {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Geist Variable', system-ui, -apple-system, sans-serif;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply bg-page text-ink antialiased transition-colors duration-200;
+  }
+
+  ::selection {
+    @apply bg-accent text-page;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent;
   }
 }
 
-/* Custom Scrollbar */
+@layer components {
+  /* Raised surface: card on page, hairline instead of shadow */
+  .surface {
+    @apply rounded-2xl border border-ink/10 bg-card;
+  }
+
+  /* Quiet meta text: counts, periods, labels */
+  .meta {
+    @apply font-mono text-xs text-ink3;
+  }
+
+  /* Form control */
+  .field {
+    @apply h-10 w-full rounded-lg border border-ink/10 bg-raised px-3 text-sm text-ink
+      placeholder:text-ink3 transition-colors duration-150
+      hover:border-ink/20 focus:border-accent focus-visible:outline-accent;
+  }
+
+  /* Small marker dot for list items */
+  .marker {
+    @apply mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-ink3;
+  }
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -17,35 +54,11 @@
   background: transparent;
 }
 
-.dark ::-webkit-scrollbar-track {
-  background: #0a0f1d;
-}
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: rgb(var(--ink) / 0.2);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
-/* Glassmorphism helpers */
-.glass-nav {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Smooth Focus styles */
-:focus-visible {
-  outline: 2px solid theme('colors.accent.DEFAULT');
-  outline-offset: 2px;
+  background: rgb(var(--ink) / 0.35);
 }
