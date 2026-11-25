@@ -8,7 +8,7 @@ export const personalInfo = {
     email: "mucahittiryaki11@gmail.com",
     github: "https://github.com/mucahittir",
     linkedin: "https://linkedin.com/in/mucahittir",
-    resumeUrl: "/mucahit-tiryaki-cv.pdf",
+    resumeUrl: "/mucahit-tiryaki-cv-tr.pdf",
     stats: [
       { label: "Yıl deneyim", value: "4+" },
       { label: "Şirket ve proje", value: "5+" },
@@ -83,7 +83,7 @@ export const personalInfo = {
     email: "mucahittiryaki11@gmail.com",
     github: "https://github.com/mucahittir",
     linkedin: "https://linkedin.com/in/mucahittir",
-    resumeUrl: "/mucahit-tiryaki-cv.pdf",
+    resumeUrl: "/mucahit-tiryaki-cv-en.pdf",
     stats: [
       { label: "Years of experience", value: "4+" },
       { label: "Companies and projects", value: "5+" },
